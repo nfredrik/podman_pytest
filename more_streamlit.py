@@ -1,3 +1,5 @@
+from python import kalas
+
 try:
     import streamlit as st
     from streamlit_autorefresh import st_autorefresh
@@ -6,6 +8,8 @@ except:
     print('Error, we failed to import modules')
     exit(42)
 
+
+kalas.kalas_print()
 
 st.title("Ping-kontroll med automatiskt intervall (autorefresh)")
 

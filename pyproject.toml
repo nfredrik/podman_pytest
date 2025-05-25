@@ -8,6 +8,7 @@ dependencies = [
     "openapi-cli-generator>=0.1.1",
     "ping3>=4.0.8",
     "pytest>=8.3.5",
+    "python-docx>=1.1.2",
     "streamlit>=1.45.1",
     "streamlit-autorefresh>=1.0.1",
 ]

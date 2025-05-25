@@ -40,7 +40,7 @@ def simulate_investment_dca(total_amount, periods, annual_return, volatility):
 total_amount = 350000         # Totalt investeringsbelopp (kr)
 periods = 12                  # Antal månader över vilka investeringen sprids ut
 annual_return = 0.05          # Antagen årlig avkastning (5% exempelvis)
-volatility = 0.05             # Månadsvolatilitet (kan justeras)
+volatility = 0.1             # Månadsvolatilitet (kan justeras)
 
 # Sätter en frö (seed) för återupprepbarhet i simuleringen
 np.random.seed(42)

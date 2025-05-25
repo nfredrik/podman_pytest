@@ -1,3 +1,5 @@
+import os
+
 from python import kalas
 
 try:
@@ -10,6 +12,8 @@ except:
 
 
 kalas.kalas_print()
+
+print(os.getenv('PYTHONPATH'))
 
 st.title("Ping-kontroll med automatiskt intervall (autorefresh)")
 

@@ -420,6 +420,18 @@ wheels = [
 ]
 
 [[package]]
+name = "holidays"
+version = "0.73"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "python-dateutil" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/46/48/6d0ef4f014d06cde97772f5cc6bf9befdfbd5b23050014de163a5e8e6848/holidays-0.73.tar.gz", hash = "sha256:36fd6ac8c340658bed0b3cc4e0b476b3726ff0c8f2cd384f4a1adbbfc9d0cef2", size = 599529, upload-time = "2025-05-19T18:03:11.3Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/65/9c/01da17421bd6a0aa230839b8313fa1615c81555f94954350fca4f4b7f129/holidays-0.73-py3-none-any.whl", hash = "sha256:2baec1a0e66d89777a824be616141f9aff75fc90d9efeb2e10281bdeb2f5b965", size = 954803, upload-time = "2025-05-19T18:03:08.892Z" },
+]
+
+[[package]]
 name = "idna"
 version = "3.10"
 source = { registry = "https://pypi.org/simple" }
@@ -1367,9 +1379,11 @@ name = "podman-pytest"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "holidays" },
     { name = "matplotlib", version = "3.9.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "matplotlib", version = "3.10.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "openapi-cli-generator" },
+    { name = "pandas" },
     { name = "ping3" },
     { name = "pytest" },
     { name = "python-docx" },
@@ -1379,8 +1393,10 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "holidays", specifier = ">=0.73" },
     { name = "matplotlib", specifier = ">=3.9.4" },
     { name = "openapi-cli-generator", specifier = ">=0.1.1" },
+    { name = "pandas", specifier = ">=2.2.3" },
     { name = "ping3", specifier = ">=4.0.8" },
     { name = "pytest", specifier = ">=8.3.5" },
     { name = "python-docx", specifier = ">=1.1.2" },

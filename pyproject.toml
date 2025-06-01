@@ -4,8 +4,10 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.9"
 dependencies = [
+    "holidays>=0.73",
     "matplotlib>=3.9.4",
     "openapi-cli-generator>=0.1.1",
+    "pandas>=2.2.3",
     "ping3>=4.0.8",
     "pytest>=8.3.5",
     "python-docx>=1.1.2",

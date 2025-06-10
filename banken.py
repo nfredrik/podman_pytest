@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-def kategorisera(text):
+def o_kategorisera(text):
     text = text.lower()
     kategorier = {
         "Willys": "Mat",
@@ -25,8 +25,6 @@ def kategorisera(text):
         "Elhandeln":"Elräkning",
         "PENSION": 'Pension',
         "Pizza":"Restaurang",
-
-
     }
 
     for nyckelord, kategori in kategorier.items():
@@ -35,6 +33,70 @@ def kategorisera(text):
 
     #print(text)  # Kan tas bort om du inte vill ha oklassificerade transaktioner loggade
     return "Vet Ej"
+
+kategorier = {
+    "mat & dagligvaror": [
+        "hemkop", "lidl 350 solna", "maxi ica storm",
+        "ica kvantum so", "ica nara furuv", "willys",
+        "coop", "stora coop sun", "rusta - solna",'pressbyran'
+        "svens hembager"
+    ],
+    "transport": [
+        "sl", "trängselskat", "okq8", "ingo",
+        "parkster", "trafikverk"
+    ],
+    "boende & fasta utgifter": [
+        "signalisten", "vattenfall", "almen",
+        "folksam", "akademikerförbundet"
+    ],
+    "nöjen & restaurang": [
+        "olstugan", "pizza stugan", "restaurang okt",
+        "thai korat", "oishii sushi", "haga bottega",
+        "harry b james", "saffran indisk"
+    ],
+    "abonnemang & teknik": [
+        "spotify", "klarna", "apple",
+        "bonner news", "fello"
+    ],
+    "övriga kostnader": [
+        "apoteket", "dressmann", "bauhaus",
+        "clas ohlson", "alecta", "musikföreningen", "zettle_",'enerot', 'lindh','mobil','svärd','apot','bustamante'
+    ],
+    "pension lön":['lön','pension', 'alecta']
+}
+
+
+o_kategorier = {
+    'Livsmedel': ['ica', 'coop', 'hemkop', 'willys', 'matbutik', 'lidl'],
+    'Restaurang': ['mc donalds', 'sibylla', 'restaurang', 'pizzeria', 'sushi','systembolaget','sergen'],
+    'Transport': ['sl', 'uber', 'bensin', 'tanka', 'trafik','ingo','folksam','biltema','körkortsavgift','okq8','parkster'],
+    'Nöje': ['spotify', 'netflix', 'bio', 'sf', 'pizza','hembag','lillsved','saffran','thai'],
+    'Räkningar': ['el', 'vatten', 'hyra', 'telia', 'comviq'],
+    'Inkomst': ['lön', 'insättning', 'överföring från', 'pension', 'alecta', 'trr'],
+    'hyra':['signalisten', 'almen'],
+    'apotek':['apot'],
+    'eneroth': ['enerot','svärd','lindh'],
+    'fack': ['ingenj', 'akadem'],
+    'överföring':['överf'],
+    'avanza':['avanza'],
+    'frisör':['zettle'],
+    'sport': ['friskis'],
+    'datorer': ['apple'],
+    'bygg':['hornbach', 'ohlson','rusta','bauhaus'],
+
+    'Övrigt': []
+}
+
+
+def kategorisera(beskrivning):
+    beskrivning = str(beskrivning).lower()
+    for kategori, nyckelord in kategorier.items():
+        if any(nyckelordet in beskrivning for nyckelordet in nyckelord):
+            return kategori
+    print(beskrivning)
+    return 'Övrigt'
+
+
 
 
 df = pd.read_csv("transaktioner.csv", sep=";", decimal=",", parse_dates=["Reskontradatum", "Transaktionsdatum"],skiprows=9)
@@ -83,6 +145,7 @@ df["Månad"] = df["Transaktionsdatum"].dt.to_period("M")
 # plt.xticks(rotation=45)  # Roterar texten för bättre läsbarhet
 # plt.show()
 
+exit(0)
 df_grouped = df.groupby("Kategori")["Belopp"].sum()
 #
 # Skapa en barplot med grupperade data

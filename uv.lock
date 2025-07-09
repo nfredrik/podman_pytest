@@ -1896,6 +1896,8 @@ dependencies = [
     { name = "pip" },
     { name = "pytest" },
     { name = "python-docx" },
+    { name = "requests" },
+    { name = "scapy" },
     { name = "scikit-learn" },
     { name = "spacy" },
     { name = "streamlit" },
@@ -1915,6 +1917,8 @@ requires-dist = [
     { name = "pip", specifier = ">=25.1.1" },
     { name = "pytest", specifier = ">=8.3.5" },
     { name = "python-docx", specifier = ">=1.1.2" },
+    { name = "requests", specifier = ">=2.32.3" },
+    { name = "scapy", specifier = ">=2.6.1" },
     { name = "scikit-learn", specifier = ">=1.6.1" },
     { name = "spacy", specifier = "==3.8.7" },
     { name = "streamlit", specifier = ">=1.45.1" },
@@ -2500,6 +2504,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/41/75/1cd0a654d300449411e6fd0821f83c1cfc7223da2e8109f586b4d9b89054/rpds_py-0.24.0-pp39-pypy39_pp73-musllinux_1_2_i686.whl", hash = "sha256:c30ff468163a48535ee7e9bf21bd14c7a81147c0e58a36c1078289a8ca7af0bd", size = 592334, upload-time = "2025-03-26T14:55:56.547Z" },
     { url = "https://files.pythonhosted.org/packages/31/33/5905e2a2e7612218e25307a9255fc8671b977449d40d62fe317775fe4939/rpds_py-0.24.0-pp39-pypy39_pp73-musllinux_1_2_x86_64.whl", hash = "sha256:369d9c6d4c714e36d4a03957b4783217a3ccd1e222cdd67d464a3a479fc17796", size = 561111, upload-time = "2025-03-26T14:55:58.309Z" },
     { url = "https://files.pythonhosted.org/packages/64/bd/f4cc34ac2261a7cb8a48bc90ce1e36dc05f1ec5ac3b4537def20be5df555/rpds_py-0.24.0-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:24795c099453e3721fda5d8ddd45f5dfcc8e5a547ce7b8e9da06fecc3832e26f", size = 235168, upload-time = "2025-03-26T14:56:00.035Z" },
+]
+
+[[package]]
+name = "scapy"
+version = "2.6.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/df/2f/035d3888f26d999e9680af8c7ddb7ce4ea0fd8d0e01c000de634c22dcf13/scapy-2.6.1.tar.gz", hash = "sha256:7600d7e2383c853e5c3a6e05d37e17643beebf2b3e10d7914dffcc3bc3c6e6c5", size = 2247754, upload-time = "2024-11-05T08:43:23.488Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4b/34/8695b43af99d0c796e4b7933a0d7df8925f43a8abdd0ff0f6297beb4de3a/scapy-2.6.1-py3-none-any.whl", hash = "sha256:88a998572049b511a1f3e44f4aa7c62dd39c6ea2aa1bb58434f503956641789d", size = 2420670, upload-time = "2024-11-05T08:43:21.285Z" },
 ]
 
 [[package]]

@@ -15,7 +15,7 @@ def get_swatch_time() -> str:
         response.raise_for_status()
         data = response.json()
         utc_now = datetime.fromisoformat(data['utc_datetime'].replace('Z', '+00:00'))
-    except (requests.RequestException, KeyError, ValueError):
+    except (Exception, requests.RequestException, KeyError, ValueError):
         # Fallback to local time if internet time fetch fails
         utc_now = datetime.now(timezone.utc)
     

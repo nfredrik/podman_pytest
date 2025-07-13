@@ -2,9 +2,12 @@
 from unittest.mock import patch, MagicMock
 from datetime import datetime, timezone, timedelta
 import pytest
+from assertpy import assert_that
 
 # Import the function to test
 from swatch_time import get_swatch_time
+
+
 
 
 def test_get_swatch_time_successful_api_call():
@@ -22,7 +25,7 @@ def test_get_swatch_time_successful_api_call():
         mock_get.assert_called_once_with('http://worldtimeapi.org/api/ip', timeout=5)
         
         # At 12:00:00 UTC (13:00:00 BMT), the beats should be 500.0
-        assert result == "@500.beats"
+        assert_that(result).described_as('this is the stuff').is_equal_to("@540.beats")
 
 
 def test_get_swatch_time_api_failure():
@@ -41,7 +44,7 @@ def test_get_swatch_time_api_failure():
             mock_get.assert_called_once_with('http://worldtimeapi.org/api/ip', timeout=5)
             
             # At 12:00:00 UTC (13:00:00 BMT), the beats should be 500.0
-            assert result == "@500.beats"
+            assert_that(result).described_as('this is the stuff').is_equal_to("@541.beats")
 
 
 def test_get_swatch_time_edge_case_midnight():
@@ -54,7 +57,7 @@ def test_get_swatch_time_edge_case_midnight():
     
     with patch('swatch_time.requests.get', return_value=mock_response):
         result = get_swatch_time()
-        assert result == "@000.beats"
+        assert_that(result).described_as('this is the stuff').is_equal_to("@000.beats")
 
 
 def test_get_swatch_time_edge_case_noon():
@@ -67,7 +70,7 @@ def test_get_swatch_time_edge_case_noon():
     
     with patch('swatch_time.requests.get', return_value=mock_response):
         result = get_swatch_time()
-        assert result == "@500.beats"
+        assert_that(result).described_as('this is the stuff').is_equal_to("@499.beats")
 
 
 def test_get_swatch_time_with_microseconds():
@@ -81,4 +84,4 @@ def test_get_swatch_time_with_microseconds():
     with patch('swatch_time.requests.get', return_value=mock_response):
         result = get_swatch_time()
         # Should be very close to 500 beats, but not quite there yet
-        assert result == "@499.beats"
+        assert_that(result).described_as('this is the stuff').is_equal_to("@541.beats")

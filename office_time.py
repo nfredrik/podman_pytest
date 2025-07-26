@@ -1,6 +1,7 @@
 import calendar
 from datetime import date
 import holidays
+from loguru import logger
 
 
 def calculate_remote_days(year: int, month: int, office_percentage: float) -> float:
@@ -38,4 +39,16 @@ if __name__ == "__main__":
     month = 7
     office_percentage = 60  # Exempel: 60% av dagarna på kontoret = 40% hemma
     remote = calculate_remote_days(year, month, office_percentage)
-    print(f"Du kan arbeta hemifrån ca {remote:.2f} dagar under {month}/{year}.")
+    logger.info(f"Du kan arbeta hemifrån ca {remote:.2f} dagar under {month}/{year}.")
+    logger.warning('warning')
+    logger.error('error')
+    logger.critical('critical')
+    logger.debug('debug')
+    logger.info('info')
+    logger.success('success')
+    logger.warning('warning')
+    logger.error('error')
+    logger.critical('critical')
+    logger.debug('debug')
+    logger.info('info')
+    logger.success('success')

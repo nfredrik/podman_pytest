@@ -64,6 +64,15 @@ wheels = [
 ]
 
 [[package]]
+name = "babel"
+version = "2.17.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/7d/6b/d52e42361e1aa00709585ecc30b3f9684b3ab62530771402248b1b1d6240/babel-2.17.0.tar.gz", hash = "sha256:0c54cffb19f690cdcc52a3b50bcbf71e07a808d1c80d549f2459b9d2cf0afb9d", size = 9951852, upload-time = "2025-02-01T15:17:41.026Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b7/b8/3fe70c75fe32afc4bb507f75563d39bc5642255d1d94f1f23604725780bf/babel-2.17.0-py3-none-any.whl", hash = "sha256:4d0b53093fdfb4b21c92b5213dba5a1b23885afa8383709427046b21c366e5f2", size = 10182537, upload-time = "2025-02-01T15:17:37.39Z" },
+]
+
+[[package]]
 name = "blinker"
 version = "1.9.0"
 source = { registry = "https://pypi.org/simple" }
@@ -496,6 +505,34 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/a9/a0/4d664bec2eadf5d27a121d54a62bf4ef5805a5eedf1005afc2788edfcc72/cymem-2.0.11-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:7a2b4d1a9b1674d6ac0e4c5136b70b805535dc8d1060aa7c4ded3e52fb74e615", size = 198436, upload-time = "2025-01-16T21:50:34.157Z" },
     { url = "https://files.pythonhosted.org/packages/87/7f/e48a20534b121fb84c526743f8cae878a4f0c097b48af6b7c027f1dda944/cymem-2.0.11-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:dec13c1a84612815365939f59e128a0031cae5f6b5a86e4b8fd7c4efa3fad262", size = 199766, upload-time = "2025-01-16T21:50:38.389Z" },
     { url = "https://files.pythonhosted.org/packages/11/f6/16044e000072ae452e006930ca8eb7d21bad1b45d1a5978f82944482a9c8/cymem-2.0.11-cp39-cp39-win_amd64.whl", hash = "sha256:332ea5bc1c13c9a186532a06846881288eb846425898b70f047a0820714097bf", size = 39590, upload-time = "2025-01-16T21:50:39.952Z" },
+]
+
+[[package]]
+name = "docxcompose"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "babel" },
+    { name = "lxml" },
+    { name = "python-docx" },
+    { name = "setuptools" },
+    { name = "six" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5d/25/07597a0fda04adf2f2fc375f48f704612a91c0c1da64f4c18e78a4a26630/docxcompose-1.4.0.tar.gz", hash = "sha256:bcf2799a0b63c29eb77a3d799a2f28443ae0f69f8691ff3d753f706be515c3e9", size = 20219, upload-time = "2022-12-14T09:45:09.195Z" }
+
+[[package]]
+name = "docxtpl"
+version = "0.20.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "docxcompose" },
+    { name = "jinja2" },
+    { name = "lxml" },
+    { name = "python-docx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/8c/3a/de0754ed1bcc47210307b7a98708d71207eb3f52594e2cf23a1ae97d7f08/docxtpl-0.20.1.tar.gz", hash = "sha256:5bab05a2c60b225c730ce18e9e2d40d748b4a12f599e150badbcb659088a51d4", size = 22560, upload-time = "2025-07-15T15:14:21.93Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/51/10/9f8c71b89c1189f5184fa05d9d8c21a4cf62cb43ca1d602a90bf58edca8c/docxtpl-0.20.1-py3-none-any.whl", hash = "sha256:8c4c63c5505373cb1624e969ea85a47d7cb61be18008a03f5271c1be4bbe501c", size = 20498, upload-time = "2025-07-15T15:14:20.703Z" },
 ]
 
 [[package]]
@@ -1970,6 +2007,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "assertpy" },
+    { name = "docxtpl" },
     { name = "gym" },
     { name = "holidays" },
     { name = "loguru" },
@@ -1995,6 +2033,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "assertpy", specifier = ">=1.1" },
+    { name = "docxtpl", specifier = ">=0.20.1" },
     { name = "gym", specifier = ">=0.26.2" },
     { name = "holidays", specifier = ">=0.73" },
     { name = "loguru", specifier = ">=0.7.3" },

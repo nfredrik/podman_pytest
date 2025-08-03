@@ -5,12 +5,14 @@ Each thread processes a string from the input list and puts the result in a queu
 Usage:
     python more_threads.py "string1" "string2" "string3"
 """
-import threading
-import queue
-import time
-import random
 import argparse
-from typing import List, Tuple, Dict, Any
+import queue
+import threading
+import time
+
+# Import the printing functions
+from result_printing import print_processing_start, print_results, print_summary
+
 
 def worker(worker_id: int, input_string: str, result_queue: queue.Queue) -> None:
     """
@@ -43,21 +45,15 @@ def worker(worker_id: int, input_string: str, result_queue: queue.Queue) -> None
     result_queue.put(result)
     print(f"Worker {worker_id}: Completed processing '{input_string}'")
 
-def main():
-    # Set up argument parser
-    parser = argparse.ArgumentParser(description='Process strings using multiple threads')
-    parser.add_argument('strings', metavar='STRING', nargs='+',
-                       help='List of strings to process (each in separate thread)')
-    parser.add_argument('--max-threads', type=int, default=5,
-                       help='Maximum number of concurrent threads (default: 5)')
+def main(args):
+    """Main function that processes strings using multiple threads.
     
-    args = parser.parse_args()
-    
+    Args:
+        args: Parsed command line arguments
+    """
     # Use the provided strings
     strings_to_process = args.strings
-    max_threads = min(args.max_threads, len(strings_to_process))
-    
-    print(f"Starting to process {len(strings_to_process)} strings using {max_threads} threads...")
+    print_processing_start(len(strings_to_process))
     
     # Create a queue for results
     result_queue = queue.Queue()
@@ -65,21 +61,12 @@ def main():
     # Create and start threads
     threads = []
     for i, input_string in enumerate(strings_to_process):
-        # Wait if we've reached max threads
-        while len(threads) >= max_threads:
-            # Check for finished threads
-            for t in threads[:]:
-                if not t.is_alive():
-                    t.join()
-                    threads.remove(t)
-            if len(threads) >= max_threads:
-                time.sleep(0.1)
-        
+        # Create and start a new thread for each string
         t = threading.Thread(
             target=worker,
-            args=(i, input_string, result_queue)
+            args=(i, input_string, result_queue),
+            daemon=True  # Allow program to exit even if threads are running
         )
-        t.daemon = True  # Allow program to exit even if threads are running
         threads.append(t)
         t.start()
     
@@ -88,39 +75,20 @@ def main():
         t.join()
     
     # Get all results from the queue
-    results = []
-    while not result_queue.empty():
-        results.append(result_queue.get())
-    
+    results =[result_queue.get() for _ in range(result_queue.qsize())]
+
+
     # Sort results by worker_id for consistent output
     results.sort(key=lambda x: x[0])
     
-    # Print all results
-    print("\n=== Processing Complete ===")
-    print(f"Processed {len(results)} strings")
-    
-    # Print detailed results
-    print("\nResults:")
-    print("-" * 50)
-    for worker_id, input_string, stats in results:
-        print(f"String {worker_id}:")
-        print(f"  Content:    '{input_string}'")
-        print(f"  Characters: {stats['char_count']}")
-        print(f"  Words:      {stats['word_count']}")
-        print(f"  Time:       {stats['processing_time']:.2f} seconds")
-        print("-" * 50)
-    
-    # Print statistics
-    if results:
-        total_chars = sum(stats['char_count'] for _, _, stats in results)
-        total_words = sum(stats['word_count'] for _, _, stats in results)
-        total_time = max(stats['processing_time'] for _, _, stats in results)
-        
-        print("\nSummary:")
-        print(f"  Total strings processed: {len(results)}")
-        print(f"  Total characters: {total_chars}")
-        print(f"  Total words: {total_words}")
-        print(f"  Total processing time: {total_time:.2f} seconds")
+    # Print results and summary using the result_printing module
+    print_results(results)
+    print_summary(results)
 
 if __name__ == "__main__":
-    main()
+
+    parser = argparse.ArgumentParser(description='Process strings using multiple threads')
+    parser.add_argument('strings', metavar='STRING', nargs='+',
+                        help='List of strings to process (each in separate thread)')
+    args = parser.parse_args()
+    main(args)

@@ -36,7 +36,7 @@ def calculate_remote_days(year: int, month: int, office_percentage: float) -> fl
 # Exempelanvändning
 if __name__ == "__main__":
     year = 2025
-    month = 7
+    month = 8
     office_percentage = 60  # Exempel: 60% av dagarna på kontoret = 40% hemma
     remote = calculate_remote_days(year, month, office_percentage)
     logger.info(f"Du kan arbeta hemifrån ca {remote:.2f} dagar under {month}/{year}.")

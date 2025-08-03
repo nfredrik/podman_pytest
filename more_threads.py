@@ -88,7 +88,9 @@ def main(args):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Process strings using multiple threads')
-    parser.add_argument('strings', metavar='STRING', nargs='+',
-                        help='List of strings to process (each in separate thread)')
+    #parser.add_argument('strings', metavar='STRING', nargs='+',
+    #                    help='List of strings to process (each in separate thread)')
+    parser.add_argument('--strings', type=str, nargs='+',
+                       help='Specify one or more test cycle identifiers (space-separated strings)')
     args = parser.parse_args()
     main(args)

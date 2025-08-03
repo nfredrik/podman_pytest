@@ -9,7 +9,7 @@ def print_processing_start(strings_count: int) -> None:
     """
     print(f"Starting to process {strings_count} strings...")
 
-def print_results(results: List[Tuple[int, str, Dict[str, Any]]]) -> None:
+def print_results(results: List[Tuple[ str, Dict[str, Any]]]) -> None:
     """Print the detailed results of string processing.
     
     Args:
@@ -21,15 +21,14 @@ def print_results(results: List[Tuple[int, str, Dict[str, Any]]]) -> None:
     # Print detailed results
     print("\nResults:")
     print("-" * 50)
-    for worker_id, input_string, stats in results:
-        print(f"String {worker_id}:")
+    for input_string, stats in results:
         print(f"  Content:    '{input_string}'")
         print(f"  Characters: {stats['char_count']}")
         print(f"  Words:      {stats['word_count']}")
         print(f"  Time:       {stats['processing_time']:.2f} seconds")
         print("-" * 50)
 
-def print_summary(results: List[Tuple[int, str, Dict[str, Any]]]) -> None:
+def print_summary(results: List[Tuple[ str, Dict[str, Any]]]) -> None:
     """Print the summary statistics of the processing.
     
     Args:
@@ -38,9 +37,9 @@ def print_summary(results: List[Tuple[int, str, Dict[str, Any]]]) -> None:
     if not results:
         return
         
-    total_chars = sum(stats['char_count'] for _, _, stats in results)
-    total_words = sum(stats['word_count'] for _, _, stats in results)
-    total_time = max(stats['processing_time'] for _, _, stats in results)
+    total_chars = sum(stats['char_count'] for  _, stats in results)
+    total_words = sum(stats['word_count'] for  _, stats in results)
+    total_time = max(stats['processing_time'] for  _, stats in results)
     
     print("\nSummary:")
     print(f"  Total strings processed: {len(results)}")

@@ -14,16 +14,15 @@ import time
 from result_printing import print_processing_start, print_results, print_summary
 
 
-def worker(worker_id: int, input_string: str, result_queue: queue.Queue) -> None:
+def worker(input_string: str, result_queue: queue.Queue) -> None:
     """
     Worker function that processes a string and puts the result in the queue.
     
     Args:
-        worker_id: Unique identifier for the worker
         input_string: String to be processed by this worker
         result_queue: Queue to put results into
     """
-    print(f"Worker {worker_id}: Processing string: '{input_string}'")
+    print(f"Processing string: '{input_string}'")
     
     # Simulate work based on string length
     duration = 0.5 + (len(input_string) * 0.1)  # Base 0.5s + 0.1s per character
@@ -34,7 +33,6 @@ def worker(worker_id: int, input_string: str, result_queue: queue.Queue) -> None
     word_count = len(input_string.split())
     
     result = (
-        worker_id,
         input_string,
         {
             'char_count': char_count,
@@ -43,7 +41,7 @@ def worker(worker_id: int, input_string: str, result_queue: queue.Queue) -> None
         }
     )
     result_queue.put(result)
-    print(f"Worker {worker_id}: Completed processing '{input_string}'")
+    print(f"Completed processing '{input_string}'")
 
 def main(args):
     """Main function that processes strings using multiple threads.
@@ -60,11 +58,11 @@ def main(args):
     
     # Create and start threads
     threads = []
-    for i, input_string in enumerate(strings_to_process):
+    for input_string in strings_to_process:
         # Create and start a new thread for each string
         t = threading.Thread(
             target=worker,
-            args=(i, input_string, result_queue),
+            args=(input_string, result_queue),
             daemon=True  # Allow program to exit even if threads are running
         )
         threads.append(t)
@@ -79,7 +77,7 @@ def main(args):
 
 
     # Sort results by worker_id for consistent output
-    results.sort(key=lambda x: x[0])
+    #results.sort(key=lambda x: x[0])
     
     # Print results and summary using the result_printing module
     print_results(results)
